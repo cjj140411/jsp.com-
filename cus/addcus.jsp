@@ -1,61 +1,83 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ page contentType="text/html; charset=gb2312" language="java" import="java.sql.*" errorPage="" %>
 <%@ page import= "java.text.DecimalFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>æ— æ ‡é¢˜æ–‡æ¡£</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ÎÞ±êÌâÎÄµµ</title>
+<style type="text/css">
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+</style>
 </head>
 
 <body>
+<script language="javascript">
+function formsubmit()
+{
+	alert("Êý¾Ý±£´æ³É¹¦£¬ÏêÏ¸Êý¾Ý¿É×ªµ½²éÑ¯È¥²é¿´");
+	form1.submit();
+}
+</script>
 <%
 Connection cn=DriverManager.getConnection("jdbc:odbc:cus");
 Statement stmt=cn.createStatement();
 %>
 <script language="javascript" type="text/javascript" src="WdatePicker.js"></script>
 <form action="addcus.jsp" method="post" name="form1" >
-<p align="center"><font size="7"> æ–°å¢žå®¢æˆ·èµ„æ–™</font></p>
-<table width="1600" border="2">
+<p align="center"><font size="7"> ÐÂÔö¿Í»§×ÊÁÏ</font></p>
+<table width="1515" border="2">
   <tr>
-  <td width="56" height="44"><div align="center">åºå·</div></td>
-    <td width="50" height="44"><div align="center">æ—ºæ—ºåç§°</div></td>
-    <td width="50"><div align="center">å®¢æˆ·åç§°</div></td>
-    <td width="80"><div align="center">å®¢æˆ·åœ°å€</div></td>
-    <td width="80"><div align="center">å®¢æˆ·ç”µè¯</div></td>
-    <td width="50"><div align="center">å¿«é€’</div></td>
-    <td width="100"><div align="center">é‡é‡(å…¬æ–¤)</div></td>
-    <td width="5"><div align="center">è¿è´¹</div></td>
-    <td width="70"><div align="center">è´­ä¹°æ–¹å¼</div></td>
-    <td width="86"><div align="center">è´­ä¹°åº—é“º</div></td>
-    <td width="50"><div align="center">è´­ä¹°æ—¥æœŸ</div></td>
-    <td width="100"><div align="center">å¤‡æ³¨</div></td>
+  <td width="45" height="44"><div align="center">ÐòºÅ</div></td>
+    <td width="140" height="44"><div align="center">ÍúÍúÃû³Æ</div></td>
+    <td width="140"><div align="center">¿Í»§Ãû³Æ</div></td>
+    <td width="280"><div align="center">¿Í»§µØÖ·</div></td>
+    <td width="140"><div align="center">¿Í»§µç»°</div></td>
+    <td width="63"><div align="center">¿ìµÝ</div></td>
+    <td width="75"><div align="center">ÖØÁ¿(¹«½ï)</div></td>
+    <td width="72"><div align="center">ÔË·Ñ</div></td>
+    <td width="111"><div align="center">¹ºÂò·½Ê½</div></td>
+    <td width="55"><div align="center">¹ºÂòµêÆÌ</div></td>
+    <td width="105"><div align="center">¹ºÂòÈÕÆÚ</div></td>
+    <td width="217"><div align="center">±¸×¢</div></td>
   </tr>
   <tr>
-  <%
+    <%
   for(int i=1;i<=10;i++)
   {
   %>
-  <td><div align="center"><%=i%></div></td>
-    <td width="50"><div align="center">
+<td><div align="center"><%=i%></div></td>
+    <td width="140"><div align="center">
       <label for="textfield"></label>
-      <input type="text" name=<%="wwmc"+i%> id="textfield" maxlength="20"/>
+      <input name=<%="wwmc"+i%> type="text" id="textfield" size="20" maxlength="20"/>
     </div></td>
     <td>
       <div align="center">
-        <input name="cname" type="text" id="textfield2" maxlength="10" />
+        <input name=<%="cname"+i%> type="text" id="textfield2" size="20" maxlength="10" />
       </div></td>
     <td>
       <div align="center">
-        <input name="caddress
-      " type="text" id="textfield3" maxlength="50" />
+        <input name=<%="caddress"+i%>
+       type="text" id="textfield3" size="40" maxlength="50" />
       </div></td>
     <td><label for="textfield4"></label>
       <div align="center">
-        <input name="cphone" type="text" id="textfield4" maxlength="13" />
+        <input name=<%="cphone"+i%> type="text" id="textfield4" size="20" maxlength="13" />
       </div></td>
     <td><label for="select"></label>
       <div align="center">
-        <select name=<%="kd"+i%> id="select">
+        <select name=<%="ckd"+i%> id="select">
+        <option value="" selected="selected"></option>
           <%
 	  String sql="select kdname from kd";
 	  ResultSet rs=stmt.executeQuery(sql);
@@ -65,8 +87,8 @@ Statement stmt=cn.createStatement();
 		  int j=0;
 		  kd[j]=rs.getString(1);
 	  
-	   %>  
-          <option value=<%=kd[j]%> selected="selected"><%=kd[j]%></option>
+	   %>
+<option value=<%=kd[j]%>><%=kd[j]%></option>
           <%
 		j++;
 		}
@@ -76,6 +98,7 @@ Statement stmt=cn.createStatement();
     <td><label for="select2"></label>
       <div align="center">
         <select name=<%="kg"+i%> id="select2">
+        <option value="" selected="selected"></option>
           <%
 	  	for(int a=1;a<=10;a++)
 		{
@@ -94,28 +117,131 @@ Statement stmt=cn.createStatement();
       </div></td>
     <td><label for="textfield5"></label>
       <div align="center">
-        <input name="fy" type="text" id="textfield5" maxlength="3" />
+        <input name=<%="fy"+i%> type="text" id="textfield5" size="10" maxlength="3" />
       </div></td>
     <td><label for="select3"></label>
       <div align="center">
         <select name=<%="cg"+i%> id="select3">
-          <option value="çº¿ä¸Š" selected="selected">çº¿ä¸Š</option>
-          <option value="çº¿ä¸‹">çº¿ä¸‹</option>
-          <option value="å†²å•">å†²å•</option>
+        <option value="" selected="selected"></option>
+          <option value="ÏßÉÏ">ÏßÉÏ</option>
+          <option value="³åµ¥">³åµ¥</option>
         </select>
       </div></td>
-    <td><div align="center"></div></td>
+    <td><div align="center">
+      <label for="select4"></label>
+      <select name=<%="netshop"+i%> id="select4">
+      <option value="" selected="selected"></option>
+        <%
+	  String sql1="select netshop from netshop";
+	  rs=stmt.executeQuery(sql1);
+	  while(rs.next()){
+		  int x=0;
+		  String netshop[]={""};
+		  netshop[x]=rs.getString(1);
+	  %>
+        <option value=<%=netshop[x]%>><%=netshop[x]%></option>
+        <%
+	  x++;
+	  }
+	  %>
+      </select>
+    </div></td>
     <td><label for="textfield6"></label>
       <div align="center">
-        <input type="text" name="buydate" id="textfield6" onclick="WdatePicker()"/>
+        <input name=<%="buydate"+i%> type="text" id="textfield6" onclick="WdatePicker()" size="15"/>
       </div></td>
     <td><label for="textfield7"></label>
       <div align="center">
-        <input name="beizhu" type="text" id="textfield7" value="" maxlength="255" />
+        <input name=<%="beizhu"+i%> type="text" id="textfield7" value="" size="30" maxlength="255" />
       </div></td>
   </tr>
   <%}%>
 </table>
+<div align="center">
+  <input name="°´Å¥" type="button" value="Ìá½»" onclick="formsubmit()" />
+  <input name="" type="reset" value="È¡Ïû" /><a href="selectcus.jsp?selectpage=1&select=0" target="_blank">×ªµ½²éÑ¯</a>
+</div>
 </form>
+<%if(request.getMethod()=="POST")
+{
+	String wwmc="";
+	String cname="";
+	String caddress="";
+	String cphone="";
+	String ckd="";
+	String kg="";
+	String fy="";
+	String cg="";
+	String netshop="";
+	String buydate="";
+	String beizhu="";
+	request.setCharacterEncoding("gb2312");
+	try{
+		for(int i=1;i<=10;i++)
+		{
+			wwmc=request.getParameter("wwmc"+i);
+			cname=request.getParameter("cname"+i);
+			caddress=request.getParameter("caddress"+i);
+			cphone=request.getParameter("cphone"+i);
+			ckd=request.getParameter("ckd"+i);
+			kg=request.getParameter("kg"+i);
+			fy=request.getParameter("fy"+i);
+			cg=request.getParameter("cg"+i);
+			netshop=request.getParameter("netshop"+i);
+			buydate=request.getParameter("buydate"+i);
+			beizhu=request.getParameter("beizhu"+i);
+			if(wwmc.length()>0|| cname.length()>0|| caddress.length()>0|| cphone.length()>0||ckd.length()>0||kg.length()>0||fy.length()>0||cg.length()>0||netshop.length()>0||buydate.length()>0||beizhu.length()>0)
+			{
+				String sql="insert into listcus values("+"'"+wwmc+"'"+","+"'"+cname+"'"+","+"'"+caddress+"'"+","+"'"+cphone+"'"+","+"'"+ckd+"'"+","+"'"+kg+"'"+","+"'"+fy+"'"+","+"'"+cg+"'"+","+"'"+netshop+"'"+","+"'"+buydate+"'"+","+"'"+beizhu+"'"+")";
+				stmt.executeUpdate(sql);
+%>				
+	<form action="addcus.jsp" method="post" name="form2"/>
+    <input type="hidden" name=<%="wwmc"+i%> value=<%=wwmc%>/>
+    <input type="hidden"  name=<%="cname"+i%> value=<%=cname%>/>
+    <input type="hidden" name=<%="caddrss"+i%> value=<%=caddress%>/>
+    <input type="hidden" name=<%="cphone"+i%> value=<%=cphone%>/>
+    <input type="hidden" name=<%="netshop"+i%> value=<%=netshop%>/>
+    </form>		
+
+<%}
+			else i++;
+		}
+	}
+	catch(Exception e)
+	{}
+	try{
+		for(int j=1;j<=10;j++)
+		{
+			wwmc=request.getParameter("wwmc"+j);
+			cname=request.getParameter("cname"+j);
+			caddress=request.getParameter("caddress"+j);
+			cphone=request.getParameter("cphone"+j);
+			netshop=request.getParameter("netshop"+j);
+			if(wwmc.length()>0||cname.length()>0||caddress.length()>0||cphone.length()>0||netshop.length()>0)
+			{
+				String sql1="select count(*) from listcus where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+"and caddress="+"'"+caddress+"'"+"and cphone="+"'"+cphone+"'"+"and netshop="+"'"+netshop+"'";
+				ResultSet rs=stmt.executeQuery(sql1);
+				while(rs.next()){
+					int count=rs.getInt(1);
+					if(count==1)
+					{
+						String sql2="insert into cus values("+"'"+wwmc+"'"+","+"'"+cname+"'"+","+"'"+caddress+"'"+","+"'"+cphone+"'"+","+"'"+netshop+"'"+","+count+")";
+						stmt.executeUpdate(sql2);
+					}
+						else if(count>1)
+						{
+							String sql2="update cus set ccount="+count+"\t"+"where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+"and caddress="+"'"+caddress+"'"+"and cphone="+"'"+cphone+"'"+"and netshop="+"'"+netshop+"'";
+							
+							stmt.executeUpdate(sql2);
+						}
+				}
+			}
+			else j++;
+		}
+	}
+	catch(Exception e)
+	{}
+}
+%>
 </body>
 </html>
