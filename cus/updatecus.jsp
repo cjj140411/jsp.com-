@@ -8,6 +8,7 @@
 <%
 Connection cn=DriverManager.getConnection("jdbc:odbc:cus");
 Statement stmt=cn.createStatement();
+ResultSet rs;
 %>
 <script language="javascript">
 function updateconfrm()
@@ -45,7 +46,7 @@ String[] kd={""};
 String [] shop={""};
 String sql="select kdname from kd";
 int sum=0;
-ResultSet rs=stmt.executeQuery(sql);
+rs=stmt.executeQuery(sql);
 %>
 <script language="javascript" type="text/jscript" src="WdatePicker.js"></script>
 <div align="center">客户资料修改 </div>
@@ -53,23 +54,19 @@ ResultSet rs=stmt.executeQuery(sql);
 <table width="396" border="1" align="center">
   <tr>
     <td width="92">旺旺名称</td>
-    <td width="288"><label for="textfield"></label>
-      <input type="text" name="updatewwmc" id="textfield"   value="<%=wwmc%>"/></td>
+    <td width="288"><%=wwmc%></td>
   </tr>
   <tr>
     <td>客户姓名</td>
-    <td><label for="textfield2"></label>
-      <input type="text" name="updatecname" id="textfield2" value="<%=cname%>" /></td>
+    <td><%=cname%></td>
   </tr>
   <tr>
     <td>客户地址</td>
-    <td><label for="textfield3"></label>
-      <input type="text" name="updatecaddress" id="textfield3"  value="<%=caddress%>"/></td>
+    <td><%=caddress%></td>
   </tr>
   <tr>
     <td>客户电话</td>
-    <td><label for="textfield4"></label>
-      <input type="text" name="updatecphone" id="textfield4"  value="<%=cphone%>"/></td>
+    <td><%=cphone%></td>
   </tr>
   <tr>
     <td>所选快递</td>
@@ -95,7 +92,7 @@ ResultSet rs=stmt.executeQuery(sql);
   <tr>
     <td>重量</td>
     <td><label for="select2"></label>
-      <select name="kg" id="select2">
+      <select name="updateckg" id="select2">
           <%
 	  	for(int a=1;a<=10;a++)
 		{
@@ -142,34 +139,11 @@ ResultSet rs=stmt.executeQuery(sql);
   </tr>
   <tr>
     <td>购买店铺</td>
-    <td><label for="netshop"></label>
-      <select name="updatenetshop" id="select4">
-      <%
-	  String sql1="select netshop from netshop";
-	  rs=stmt.executeQuery(sql1);
-	  while(rs.next())
-	  {
-		  int k=0;
-		  shop[k]=rs.getString(1);
-	  %>
-      <option value="<%=shop[k]%>"><%=shop[k]%></option>
-      <%
-	  k++;
-	  }
-	  %>
-      </select>
-      <%
-	  if(netshop.length()>0)
-	  {
-	  %>
-      已选购买店铺:<%=netshop%>
-      <%}%>
-      </td>
+    <td><%=netshop%></td>
   </tr>
   <tr>
     <td height="26">购买日期</td>
-    <td><label for="textfield9"></label>
-      <input type="text" name="updatebuydate" id="textfield9" onclick="WdatePicker()" value="<%=buydate%>"/></td>
+    <td><%=buydate%></td>
   </tr>
   <tr>
     <td height="25">备注</td>
@@ -178,54 +152,53 @@ ResultSet rs=stmt.executeQuery(sql);
   </tr>
 </table>
 <div align="center">
-  <input name="" type="button" value="修改" onclick="updateconfrm()"/>
+  <input name="" type="button" value="修改" onclick="return updateconfrm()"/>
   <input name="" type="reset"  value="取消"/>
 </div>
 <input type="hidden" name="wwmc" value="<%=wwmc%>" />
-<input type="hidden" name="cname" vlaue="<%=cname%>" />
-<input type="hidden" mame="caddress" value="<%=caddress%>" />
+<input type="hidden" name="cname" value="<%=cname%>" />
+<input type="hidden" name="caddress" value="<%=caddress%>" />
 <input type="hidden" name="cphone" value="<%=cphone%>" />
-<input type="hidden" name="ckd" value="<%=ckd%>" />
-<input type="hidden" name="kg" value="<%=kg%>" />
-<input type="hidden" name="fy" value="<%=fy%>" />
-<input type="hidden" name="cg" value="<%=cg%>" />
 <input type="hidden" name="netshop" value="<%=netshop%>" />
 <input type="hidden" name="buydate" value="<%=buydate%>" />
 <input type="hidden" name="beizhu" value="<%=beizhu%>" />
 </form>
-<%
+<div align="center">
+  <%
 }
 if(request.getMethod()=="POST")
 {
 	request.setCharacterEncoding("gb2312");
-	String updatewwmc=request.getParameter("updatewwmc");
-	String updatecname=request.getParameter("updatecname");
-	String updatecaddress=request.getParameter("updateaddress");
-	String updatecphone=request.getParameter("updatecphone");
-	String updateckd=request.getParameter("ckd");
+	String updatekd=request.getParameter("updatekd");
 	String updateckg=request.getParameter("updateckg");
 	String updatefy=request.getParameter("updatefy");
 	String updatecg=request.getParameter("updatecg");
-	String updatenetshop=request.getParameter("updatenetshop");
-	String updatebuydate=request.getParameter("updatebuydate");
 	String updatebeizhu=request.getParameter("updatebeizhu");
 	String wwmc=request.getParameter("wwmc");
 	String cname=request.getParameter("cname");
 	String caddress=request.getParameter("caddress");
 	String cphone=request.getParameter("cphone");
-	String ckd=request.getParameter("ckd");
-	String kg=request.getParameter("kg");
-	String fy=request.getParameter("fy");
-	String cg=request.getParameter("cg");
 	String netshop=request.getParameter("netshop");
 	String buydate=request.getParameter("buydate");
-	String beizhu=request.getParameter("beizhu");
-	String sql="";
-	if(!wwmc.matches(updatewwmc)||!cname.matches(updatecname)||!caddress.matches(updatecaddress)||cphone.matches(cphone)||netshop.matches(netshop))
-	{
-		
-	}
+	String sql="update listcus set ckd="+"'"+updatekd+"'"+" where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+"and caddress="+"'"+caddress+"'"+"and cphone="+"'"+cphone+"'"+"and netshop="+"'"+netshop+"'"+"and buydate="+"'"+buydate+"'";
+	stmt.executeUpdate(sql);
+	String sql1="update listcus set kg="+"'"+updateckg+"'"+" where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+" and caddress="+"'"+caddress+"'"+" and cphone="+"'"+cphone+"'"+" and netshop="+"'"+netshop+"'"+" and buydate="+"'"+buydate+"'";
+	stmt.executeUpdate(sql1);
+	String sql2="update listcus set fy="+"'"+updatefy+"'"+" where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+" and caddress="+"'"+caddress+"'"+" and cphone="+"'"+cphone+"'"+" and netshop="+"'"+netshop+"'"+" and buydate="+"'"+buydate+"'";
+	stmt.executeUpdate(sql2);
+	String sql3="update listcus set cg="+"'"+updatecg+"'"+" where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+" and caddress="+"'"+caddress+"'"+" and cphone="+"'"+cphone+"'"+" and netshop="+"'"+netshop+"'"+" and buydate="+"'"+buydate+"'";
+	stmt.executeUpdate(sql3);
+	String sql4="update listcus set beizhu="+"'"+updatebeizhu+"'"+" where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+" and caddress="+"'"+caddress+"'"+" and cphone="+"'"+cphone+"'"+" and netshop="+"'"+netshop+"'"+" and buydate="+"'"+buydate+"'";
+	stmt.executeUpdate(sql4);
+%>
+<div align="center">	数据修改完成，修改后的结果可以再关闭本页面后刷新查询页面进行查看。
+</div>
+<div align="center">
+<input type="button" value="关闭窗口" onclick="javascript:window.close()"/>
+</div>
+<%
 }
 %>
+</div>
 </body>
 </html>
