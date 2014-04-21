@@ -9,6 +9,8 @@ Connection cn=DriverManager.getConnection("jdbc:odbc:cus");
 Statement stmt=cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 String sql="";
 ResultSet rs;
+String select="";
+String con="";
 %>
 <style type="text/css">
 a:link {
@@ -58,8 +60,8 @@ a:active {
   String choosepage=request.getParameter("selectpage");
   int selectpage=0;
   try{
-	 String select=request.getParameter("select");
-	 String con=request.getParameter("con");
+	 select=request.getParameter("select");
+	 con=request.getParameter("con");
 	 int cho=Integer.parseInt(select);
 	 if(select.matches("0"))
 	 sql="select * from cus";
@@ -116,6 +118,11 @@ a:active {
 	 startpage=1; //开始记录等于第一条记录、结束等于当前页数乘以每页记录数
 	 endpage=selectpage*pagesize;
  }
+ else if(selectpage>1&&rscount%10!=0)
+{
+	startpage=selectpage*10-9;
+	endpage=rscount;
+}
  else if(selectpage>1)//如果分页选择不是第一页处理方法：开始等于选择页数乘以每页记录数减9，结束等于选择页数乘以每页记录数
  {
 	 startpage=selectpage*pagesize-9;
@@ -155,7 +162,7 @@ else pagecount=calcpagecount;
 for(int i=1;i<=pagecount;i++)
 {
 %>
-  <a href="selectcus.jsp?selectpage=<%=i%>"><%=i%></a>
+  <a href="selectcus.jsp?selectpage=<%=i%>&select=<%=select%>&con=<%=con%>"><%=i%></a>
   <%}%>
 <p> 
   <%out.println("共"+rscount+"条记录");%>
