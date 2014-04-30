@@ -76,10 +76,54 @@ ResultSet rs=stmt.executeQuery(sql);
     <td><%=cname1%></td>
     <td><%=caddress1%></td>
     <td><%=cphone1%></td>
+    <%
+	if(ckd1.length()==0)
+	{
+	%>
+    <td>&nbsp;</td>
+    <%
+	}
+	else
+	{
+	%>
     <td><%=ckd1%></td>
+    <%}%>
+    <%
+	if(kg1.length()==0)
+	{
+	%>
+    <td>&nbsp;</td>
+    <%
+	}
+	else
+	{
+	%>
     <td><%=kg1%></td>
+    <%}%>
+    <%
+	if(fy1.length()==0)
+	{
+	%>
+    <td>&nbsp;</td>
+    <%
+	}
+	else
+	{
+	%>
     <td><%=fy1%></td>
+    <%}%>
+    <%
+	if(cg1.length()==0)
+	{
+	%>
+    <td>&nbsp;</td>
+    <%
+	}
+	else
+	{
+	%>
     <td><%=cg1%></td>
+    <%}%>
     <td><%=netshop1%></td>
     <td><%=buydate1%></td>
     <%
@@ -94,7 +138,7 @@ ResultSet rs=stmt.executeQuery(sql);
 	%>
     <td><%=beizhu1%></td>
     <%}%>
-    <td><a href="updatecus.jsp?wwmc=<%=wwmc1%>&cname=<%=cname1%>&caddress=<%=caddress1%>&cphone=<%=cphone1%>&ckd=<%=ckd1%>&kg=<%=kg1%>&fy=<%=fy1%>&cg=<%=cg1%>&netshop=<%=netshop1%>&buydate=<%=buydate1%>&beizhu=<%=beizhu1%>" target="_blank">修改资料</a></td>
+    <td><a href="update.jsp?wwmc=<%=wwmc1%>&cname=<%=cname1%>&caddress=<%=caddress1%>&cphone=<%=cphone1%>&ckd=<%=ckd1%>&kg=<%=kg1%>&fy=<%=fy1%>&cg=<%=cg1%>&netshop=<%=netshop1%>&buydate=<%=buydate1%>&beizhu=<%=beizhu1%>" target="_blank">修改资料</a></td>
   </tr>
   <%
   i++;

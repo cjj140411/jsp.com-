@@ -78,9 +78,18 @@ int rscount=0;
 int pagesize=10;
 int startpage=0;
 int endpage=0;
+int countpage=0;
 rs.last();
 rscount=rs.getRow();
 rs.first();
+if(rscount%pagesize==0)
+{
+	countpage=rscount/pagesize;
+}
+else
+{
+	countpage=rscount/pagesize+1;
+}
 if(rscount<=pagesize)
 {
 	startpage=1;
@@ -91,15 +100,18 @@ else if(choosepage==1)
 	startpage=1;
 	endpage=choosepage*pagesize;
 }
-else if(choosepage>1&&rscount%10!=0)
-{
-	startpage=choosepage*10-9;
-	endpage=rscount;
-}
 else if(choosepage>1)
 {
-	startpage=choosepage*10-9;
+	if(rscount-choosepage*pagesize<=10&&choosepage==countpage)
+	{
+		startpage=choosepage*pagesize-9;
+		endpage=rscount;
+	}
+	else
+	{
+	startpage=choosepage*pagesize-9;
 	endpage=choosepage*pagesize;
+	}
 }
 %>
 <table width="1338" border="1">
@@ -121,8 +133,9 @@ else if(choosepage>1)
   int sum=0;
   for(int i=startpage;i<=endpage;i++)
   {
-	  sum++;
-	  rs.absolute(i);
+	  if(i>rscount) break;
+	 rs.absolute(i);
+	 sum++;
 	  String wwmc=rs.getString(1);
 	  String cname=rs.getString(2);
 	  String caddress=rs.getString(3);
@@ -136,7 +149,7 @@ else if(choosepage>1)
 	  String beizhu=rs.getString(11);
   %>
   <tr>
-    <td><div align="center"><%=sum%></div></td>
+    <td><div align="center"><%=i%></div></td>
     <td><div align="center"><%=wwmc%></div></td>
     <td><div align="center"><%=cname%></div></td>
     <td><div align="center"><%=caddress%></div></td>
@@ -210,6 +223,10 @@ if(rscount<=pagesize)
 else if(rscount%10!=0)
 {
 	pagecount++;
+}
+else if(rscount%10==0)
+{
+	pagecount=rscount/pagesize;
 }
 %>
 µÚ

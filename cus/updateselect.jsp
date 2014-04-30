@@ -210,7 +210,7 @@ else if(choosepage>1)
 	%>
     <td width="17"><div align="center"><%=beizhu%></div></td>
     <%}%>
-    <td width="61"><div align="center"><a href="updatecus.jsp?wwmc=<%=wwmc%>&cname=<%=cname%>&caddress=<%=caddress%>&cphone=<%=cphone%>&ckd=<%=ckd%>&kg=<%=kg%>&fy=<%=fy%>&cg=<%=cg%>&netshop=<%=netshop%>&buydate=<%=buydate%>&beizhu=<%=beizhu%>">修改资料</a></div></td>
+    <td width="61"><div align="center"><a href="update.jsp?wwmc=<%=wwmc%>&cname=<%=cname%>&caddress=<%=caddress%>&cphone=<%=cphone%>&ckd=<%=ckd%>&kg=<%=kg%>&fy=<%=fy%>&cg=<%=cg%>&netshop=<%=netshop%>&buydate=<%=buydate%>&beizhu=<%=beizhu%>">修改资料</a></div></td>
   </tr>
   <%}%>
   

@@ -27,6 +27,7 @@ function formsubmit()
 {
 	alert("数据保存成功，详细数据可转到查询去查看");
 	form1.submit();
+	form2.submit();
 }
 </script>
 <%
@@ -72,7 +73,7 @@ Statement stmt=cn.createStatement();
       </div></td>
     <td><label for="textfield4"></label>
       <div align="center">
-        <input name=<%="cphone"+i%> type="text" id="textfield4" size="20" maxlength="13" />
+        <input name=<%="cphone"+i%> type="text" id="textfield4" size="20" maxlength="20" />
       </div></td>
     <td><label for="select"></label>
       <div align="center">
@@ -195,13 +196,7 @@ Statement stmt=cn.createStatement();
 				String sql="insert into listcus values("+"'"+wwmc+"'"+","+"'"+cname+"'"+","+"'"+caddress+"'"+","+"'"+cphone+"'"+","+"'"+ckd+"'"+","+"'"+kg+"'"+","+"'"+fy+"'"+","+"'"+cg+"'"+","+"'"+netshop+"'"+","+"'"+buydate+"'"+","+"'"+beizhu+"'"+")";
 				stmt.executeUpdate(sql);
 %>				
-	<form action="addcus.jsp" method="post" name="form2"/>
-    <input type="hidden" name=<%="wwmc"+i%> value=<%=wwmc%>/>
-    <input type="hidden"  name=<%="cname"+i%> value=<%=cname%>/>
-    <input type="hidden" name=<%="caddrss"+i%> value=<%=caddress%>/>
-    <input type="hidden" name=<%="cphone"+i%> value=<%=cphone%>/>
-    <input type="hidden" name=<%="netshop"+i%> value=<%=netshop%>/>
-    </form>		
+	
 
 <%}
 			else i++;
@@ -210,6 +205,7 @@ Statement stmt=cn.createStatement();
 	catch(Exception e)
 	{}
 	try{
+		int count=0;
 		for(int j=1;j<=10;j++)
 		{
 			wwmc=request.getParameter("wwmc"+j);
@@ -222,7 +218,8 @@ Statement stmt=cn.createStatement();
 				String sql1="select count(*) from listcus where wwmc="+"'"+wwmc+"'"+"and cname="+"'"+cname+"'"+"and caddress="+"'"+caddress+"'"+"and cphone="+"'"+cphone+"'"+"and netshop="+"'"+netshop+"'";
 				ResultSet rs=stmt.executeQuery(sql1);
 				while(rs.next()){
-					int count=rs.getInt(1);
+					count=rs.getInt(1);
+				}
 					if(count==1)
 					{
 						String sql2="insert into cus values("+"'"+wwmc+"'"+","+"'"+cname+"'"+","+"'"+caddress+"'"+","+"'"+cphone+"'"+","+"'"+netshop+"'"+","+count+")";
@@ -235,10 +232,10 @@ Statement stmt=cn.createStatement();
 							stmt.executeUpdate(sql2);
 						}
 				}
+				else j++;
 			}
-			else j++;
+			
 		}
-	}
 	catch(Exception e)
 	{}
 }

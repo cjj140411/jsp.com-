@@ -9,6 +9,7 @@
 Connection cn=DriverManager.getConnection("jdbc:odbc:cus");
 Statement stmt=cn.createStatement();
 ResultSet rs;
+String sql="";
 %>
 <script language="javascript">
 function updateconfrm()
@@ -44,7 +45,7 @@ String buydate=request.getParameter("buydate");
 String beizhu=request.getParameter("beizhu");
 String[] kd={""};
 String [] shop={""};
-String sql="select kdname from kd";
+sql="select kdname from kd";
 int sum=0;
 rs=stmt.executeQuery(sql);
 %>

@@ -153,12 +153,15 @@ a:active {
   <%
 int pagecount=0;//分页数计算
 int calcpagecount=0;//分页数计算临时变量
-calcpagecount=rscount/10;
+calcpagecount=rscount/pagesize;
 if(rscount<=10)  //自动计算分页数（如果记录数小于10，分页数等于1，如果记录数求余不等于0，分页数加1，否则分页数将按照记录数除以10计算
 pagecount=1;
-else if(calcpagecount%10!=0)
-pagecount=calcpagecount+1;
-else pagecount=calcpagecount;
+else if(rscount%10!=0)
+pagecount=rscount/pagesize+1;
+else if(rscount%10==0)
+{
+ pagecount=rscount/pagesize;
+}
 for(int i=1;i<=pagecount;i++)
 {
 %>
